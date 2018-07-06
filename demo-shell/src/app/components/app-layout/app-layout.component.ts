@@ -17,6 +17,7 @@
 
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { UserPreferencesService, AppConfigService, AlfrescoApiService } from '@alfresco/adf-core';
+import { SidenavSizerService } from '../../services/sidenav-sizer.service';
 
 @Component({
     templateUrl: 'app-layout.component.html',
@@ -47,6 +48,7 @@ export class AppLayoutComponent implements OnInit {
         { href: '/webscript', icon: 'extension', title: 'APP_LAYOUT.WEBSCRIPT' },
         { href: '/tag', icon: 'local_offer', title: 'APP_LAYOUT.TAG' },
         { href: '/social', icon: 'thumb_up', title: 'APP_LAYOUT.SOCIAL' },
+        { href: '/sidenavsizer', icon: 'weekend', title: 'APP_LAYOUT.SIDENAV-SIZER' },
         { href: '/settings-layout', icon: 'settings', title: 'APP_LAYOUT.SETTINGS' },
         { href: '/extendedSearch', icon: 'search', title: 'APP_LAYOUT.SEARCH' },
         { href: '/overlay-viewer', icon: 'pageview', title: 'APP_LAYOUT.OVERLAY_VIEWER' },
@@ -59,6 +61,9 @@ export class AppLayoutComponent implements OnInit {
 
     enabelRedirect = true;
 
+    maxSidenav = 220;
+    minSidenav = 70;
+
     ngOnInit() {
         const expand = this.config.get<boolean>('sideNav.expandedSidenav');
         const preserveState = this.config.get('sideNav.preserveState');
@@ -70,10 +75,18 @@ export class AppLayoutComponent implements OnInit {
         }
     }
 
-    constructor(private userpreference: UserPreferencesService, private config: AppConfigService, private alfrescoApiService: AlfrescoApiService) {
+    constructor(private userpreference: UserPreferencesService,
+                private config: AppConfigService,
+                private alfrescoApiService: AlfrescoApiService,
+                private sidenavSizerService: SidenavSizerService) {
         if (this.alfrescoApiService.getInstance().isOauthConfiguration()) {
             this.enabelRedirect = false;
         }
+
+        this.sidenavSizerService.sidenavMaxChanges.subscribe((newMax) => {
+            this.maxSidenav = newMax;
+        });
+        this.sidenavSizerService.sidenavMinChanges.subscribe((newMin) => this.minSidenav = newMin);
     }
 
     setState(state) {

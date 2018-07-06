@@ -38,6 +38,7 @@ import { FileViewComponent } from './components/file-view/file-view.component';
 import { WebscriptComponent } from './components/webscript/webscript.component';
 import { TagComponent } from './components/tag/tag.component';
 import { SocialComponent } from './components/social/social.component';
+import { SidenavSizerComponent } from './components/sidenav-sizer/sidenav-sizer.component';
 import { VersionManagerDialogAdapterComponent } from './components/files/version-manager-dialog-adapter.component';
 import { MetadataDialogAdapterComponent } from './components/files/metadata-dialog-adapter.component';
 import { BlobPreviewComponent } from './components/blob-preview/blob-preview.component';
@@ -51,6 +52,7 @@ import { ProcessAttachmentsComponent } from './components/process-service/proces
 import { SharedLinkViewComponent } from './components/shared-link-view/shared-link-view.component';
 import { DemoPermissionComponent } from './components/permissions/demo-permissions.component';
 import { PreviewService } from './services/preview.service';
+import { SidenavSizerService } from './services/sidenav-sizer.service';
 import { BreadcrumbDemoComponent } from './components/breadcrumb-demo/breadcrumb-demo.component';
 import { ContentNodeSelectorComponent } from './components/content-node-selector/content-node-selector.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
@@ -96,6 +98,7 @@ import { ReportIssueComponent } from './components/report-issue/report-issue.com
         WebscriptComponent,
         TagComponent,
         SocialComponent,
+        SidenavSizerComponent,
         CustomSourcesComponent,
         VersionManagerDialogAdapterComponent,
         MetadataDialogAdapterComponent,
@@ -130,7 +133,8 @@ import { ReportIssueComponent } from './components/report-issue/report-issue.com
                 source: 'resources/lazy-loading'
             }
         },
-        PreviewService
+        PreviewService,
+        SidenavSizerService
     ],
     entryComponents: [
         VersionManagerDialogAdapterComponent,
