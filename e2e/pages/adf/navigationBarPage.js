@@ -28,6 +28,7 @@ var NavigationBarPage = function (){
     var themeMenuContent = element(by.css("div[class*='mat-menu-panel']"));
     var logoutButton = element(by.css("a[adf-logout]"));
     var cardViewButton = element(by.cssContainingText(".sidenav-menu-label","CardView"));
+    var languageMenuButton = element(by.css('button[data-automation-id="language-menu-button"]'));
 
     /**
      * Click Content Services Button
@@ -96,6 +97,17 @@ var NavigationBarPage = function (){
         Util.waitUntilElementIsVisible(cardViewButton);
         cardViewButton.click();
     };
+
+    this.chooseLanguage = function(language) {
+        let buttonLanguage = element(by.xpath(`//adf-language-menu//button[contains(text(), '${language}')]`));
+        Util.waitUntilElementIsVisible(buttonLanguage);
+        buttonLanguage.click();
+    }
+
+    this.openLanguageMenu= function() {
+        Util.waitUntilElementIsVisible(languageMenuButton);
+        languageMenuButton.click();
+    }
 
 };
 
