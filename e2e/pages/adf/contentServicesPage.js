@@ -340,7 +340,7 @@ var ContentServicesPage = function () {
     };
 
     this.enableMediumTimeFormat = function () {
-        var mediumTimeFormat = element(by.css('#enableMediumTimeFormat');
+        var mediumTimeFormat = element(by.css('#enableMediumTimeFormat'));
         Util.waitUntilElementIsVisible(mediumTimeFormat);
         mediumTimeFormat.click();
         return this;
@@ -382,6 +382,14 @@ var ContentServicesPage = function () {
 
     this.checkDandDIsDisplayed = function () {
         Util.waitUntilElementIsVisible(dragAndDrop);
+    };
+
+    this.getColumnValueForRow = function (file, columnName) {
+        let row = contentList.getRowByRowName(file);
+        Util.waitUntilElementIsVisible(row);
+        let rowColumn = row.element(by.css('div[title="'+columnName+'"] span'));
+        Util.waitUntilElementIsVisible(rowColumn);
+        return rowColumn.getText();
     };
 
 };
