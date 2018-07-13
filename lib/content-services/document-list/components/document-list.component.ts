@@ -834,6 +834,7 @@ export class DocumentListComponent implements OnInit, OnChanges, OnDestroy, Afte
             });
         }
 
+        return Observable.of([]);
     }
 
     ngOnDestroy() {
