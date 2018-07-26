@@ -17,6 +17,7 @@
 
 import { Component, ContentChildren, EventEmitter, Input, Output, QueryList, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material';
+
 @Component({
     selector: 'adf-info-drawer-tab',
     template: '<ng-template><ng-content></ng-content></ng-template>'
@@ -29,6 +30,9 @@ export class InfoDrawerTabComponent {
     /** Icon to render for the tab. */
     @Input()
     icon: string = null;
+
+    @Input()
+    closeable: boolean = false;
 
     @ViewChild(TemplateRef)
     content: TemplateRef<any>;
@@ -50,9 +54,14 @@ export class InfoDrawerComponent {
     @Input()
     selectedIndex: number = 0;
 
+    mouseOn: boolean = false;
+
     /** Emitted when the currently active tab changes. */
     @Output()
     currentTab: EventEmitter<number> = new EventEmitter<number>();
+
+    @Output()
+    closeTab: EventEmitter<number> = new EventEmitter<number>();
 
     @ContentChildren(InfoDrawerTabComponent)
     contentBlocks: QueryList<InfoDrawerTabComponent>;
@@ -63,5 +72,14 @@ export class InfoDrawerComponent {
 
     onTabChange(event: MatTabChangeEvent) {
         this.currentTab.emit(event.index);
+    }
+
+    mouseOnTab() {
+        this.mouseOn = !this.mouseOn;
+    }
+
+    onCloseClick(){
+        this.closeTab.emit();
+        this.mouseOnTab();
     }
 }

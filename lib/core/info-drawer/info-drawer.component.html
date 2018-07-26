@@ -8,17 +8,18 @@
 
     <ng-template #tabLayout>
         <mat-tab-group [(selectedIndex)]="selectedIndex" class="adf-info-drawer-tabs" (selectedTabChange)="onTabChange($event)">
-            <ng-container *ngFor="let contentBlock of contentBlocks">
-                <mat-tab [label]="contentBlock.label" class="adf-info-drawer-tab">
-                    <ng-container *ngIf="contentBlock.icon">
-                        <ng-template mat-tab-label>
-                            <mat-icon>{{ contentBlock.icon }}</mat-icon>
-                        </ng-template>
-                    </ng-container>
-
-                    <ng-container *ngTemplateOutlet="contentBlock.content"></ng-container>
-                </mat-tab>
-            </ng-container>
+            <mat-tab class="adf-info-drawer-tab" *ngFor="let contentBlock of contentBlocks">
+                <ng-template mat-tab-label>
+                    <div class="mouseInteraction" (mouseenter)="mouseOnTab()" (mouseleave)="mouseOnTab()">
+                        <img *ngIf="contentBlock.icon" [src]="contentBlock.icon">
+                        <p>{{ contentBlock.label }}</p>
+                        <button mat-icon-button  (click)="onCloseClick()" *ngIf="contentBlock.closeable && mouseOn">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                </ng-template>
+                <ng-container *ngTemplateOutlet="contentBlock.content"></ng-container>
+            </mat-tab>
         </mat-tab-group>
     </ng-template>
 
